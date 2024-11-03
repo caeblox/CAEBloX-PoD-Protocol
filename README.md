@@ -1,4 +1,5 @@
-# Similarity-Analyzer
+# CAEBloX PoD Prottocol
+
 ## Overview
 The Similarity-Analyzer is an advanced geometry similarity scoring system built to support the minting process for CAEBlox, a platform focused on verifying 3D geometries Similarity. This tool automates the evaluation of 3D STL files, leveraging Signed Distance Function (SDF) to deliver highly accurate similarity scoring between Network designs.
 **STL-Similarity-Analyzer** is a Python tool designed for comparing 3D geometries within STL files. It leverages Signed Distance Function (SDF) and nearest-neighbors techniques to compute similarity scores, assess Proof of Design (PoD) compliance, and manage a database of unique STL designs.
