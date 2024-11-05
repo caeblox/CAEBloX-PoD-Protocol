@@ -1,44 +1,37 @@
+import os
 import shutil
 import pandas as pd
+import torch
 from geometry_loader import load_stl_geometry, resample_geometry
-from similarity_metrics import calculate_sdf_similarity
+from similarity_metrics import calculate_similarity
 
-def add_file_to_database(input_file_path, database_folder):
+def mint_new_file(input_stl_file_path, database_folder):
     """
-    Adds a new STL file to the database.
-    
-    Parameters:
-        input_file_path (str): Path to the STL file.
-        database_folder (str): Path to the database folder.
+    Mint a new STL file by copying it to the database.
     """
-    shutil.copy(input_file_path, database_folder)
-    print(f"File added to the database: {input_file_path}")
+    shutil.copy(input_stl_file_path, os.path.join(database_folder, os.path.basename(input_stl_file_path)))
+    print(f"New file '{os.path.basename(input_stl_file_path)}' added to the database.")
 
-def update_similarity_matrix(new_file, database_folder, similarity_matrix, target_count):
+def update_similarity_matrix(new_file, database_folder, matrix_data, target_points_count):
     """
-    Updates the similarity matrix after adding a new file to the database.
-
-    Parameters:
-        new_file (str): Path to the new STL file.
-        database_folder (str): Path to the database folder.
-        similarity_matrix (pd.DataFrame): Existing similarity matrix.
-        target_count (int): Target point count for resampling.
-
-    Returns:
-        pd.DataFrame: Updated similarity matrix.
+    Update the similarity matrix after adding a new file to the database.
     """
+    new_row = {}
     new_geometry = load_stl_geometry(new_file)
-    new_geometry_resampled = resample_geometry(new_geometry, target_count)
+    new_geometry_resampled = resample_geometry(new_geometry, target_points_count)
     new_tensor = torch.tensor(new_geometry_resampled, dtype=torch.float32)
 
-    new_row = {}
-    for existing_file in similarity_matrix.columns:
-        existing_geometry = load_stl_geometry(existing_file)
-        existing_resampled = resample_geometry(existing_geometry, target_count)
-        existing_tensor = torch.tensor(existing_resampled, dtype=torch.float32)
+    for existing_file in matrix_data.columns:
+        existing_path = os.path.join(database_folder, existing_file)
+        existing_geometry = load_stl_geometry(existing_path)
+        existing_geometry_resampled = resample_geometry(existing_geometry, target_points_count)
+        existing_tensor = torch.tensor(existing_geometry_resampled, dtype=torch.float32)
 
-        score = calculate_sdf_similarity(new_tensor, existing_tensor)
-        new_row[existing_file] = score
+        similarity_score = calculate_similarity(new_tensor, existing_tensor)
+        new_row[existing_file] = similarity_score
 
-    similarity_matrix = similarity_matrix.append(new_row, ignore_index=True)
-    return similarity_matrix
+    new_row[new_file] = 1.0  # Self-similarity
+    matrix_data = matrix_data.append(pd.Series(new_row, name=new_file))
+    print("Updated Network Similarity Matrix:")
+    print(matrix_data)
+    return matrix_data
