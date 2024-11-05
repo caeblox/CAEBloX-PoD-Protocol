@@ -32,7 +32,18 @@ The tool processes all files in the `new_cad` folder, checks their similarity to
 
 ## Directory Structure
 
-├── src/ │ ├── main.py # Main script to run the analyzer │ ├── geometry_loader.py # Module for loading STL geometry │ ├── similarity_metrics.py # Module for similarity calculations │ ├── database_manager.py # Manages database and minting of new CAD files │ ├── pod_calculator.py # Calculates Proof of Design (PoD) score │ ├── file_converter.py # Handles STL/VTK file reading and VTK-to-STL conversion ├── data/ │ ├── database/ # Folder for storing database CAD files │ ├── new_cad/ # Folder for storing incoming CAD files for analysis ├── README.txt # Project documentation └── requirements.txt # Python dependencies
+  src:
+    main.py: "Main script to run the analyzer"
+    geometry_loader.py: "Module for loading and resampling STL geometry"
+    similarity_metrics.py: "Module for similarity calculations using Signed Distance Function (SDF)"
+    database_manager.py: "Manages CAD database and minting of new CAD files"
+    pod_calculator.py: "Calculates Proof of Design (PoD) score for new CAD files"
+    file_converter.py: "Handles STL/VTK file reading and VTK-to-STL conversion"
+  data:
+    database/: "Folder for storing existing CAD files in the database"
+    new_cad/: "Folder for storing new incoming CAD files for analysis"
+  README.md: "Project documentation"
+  requirements.txt: "Python dependencies"
 
 
 ---
