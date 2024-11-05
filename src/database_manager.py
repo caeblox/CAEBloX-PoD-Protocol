@@ -39,17 +39,20 @@ def build_initial_similarity_matrix(database_folder, target_points_count):
 
     return matrix_data
 
-def update_similarity_matrix(new_file, database_folder, matrix_data, target_points_count):
+def update_similarity_matrix(new_file_name, database_folder, matrix_data, target_points_count):
     """
     Update the similarity matrix after adding a new file to the database.
     """
+    # Use only the filename in matrix and paths for loading
+    new_file_path = os.path.join(database_folder, new_file_name)
+    
     new_row = {}
-    new_geometry = load_stl_geometry(new_file)
+    new_geometry = load_stl_geometry(new_file_path)  # Load geometry using full path
     new_geometry_resampled = resample_geometry(new_geometry, target_points_count)
     new_tensor = torch.tensor(new_geometry_resampled, dtype=torch.float32)
 
     for existing_file in matrix_data.columns:
-        existing_path = os.path.join(database_folder, existing_file)
+        existing_path = os.path.join(database_folder, existing_file)  # Full path for each database file
         existing_geometry = load_stl_geometry(existing_path)
         existing_geometry_resampled = resample_geometry(existing_geometry, target_points_count)
         existing_tensor = torch.tensor(existing_geometry_resampled, dtype=torch.float32)
@@ -57,10 +60,10 @@ def update_similarity_matrix(new_file, database_folder, matrix_data, target_poin
         similarity_score = calculate_similarity(new_tensor, existing_tensor)
         new_row[existing_file] = similarity_score
 
-    new_row[new_file] = 1.0  # Self-similarity
-    new_row_series = pd.Series(new_row, name=new_file)
+    new_row[new_file_name] = 1.0  # Self-similarity
+    new_row_series = pd.Series(new_row, name=new_file_name)
     matrix_data = pd.concat([matrix_data, new_row_series.to_frame().T], axis=0)
-    matrix_data[new_file] = new_row_series  # Add as a new column to maintain matrix symmetry
+    matrix_data[new_file_name] = new_row_series  # Add as a new column to maintain matrix symmetry
 
     print("Updated Network Similarity Matrix:")
     print(matrix_data)
