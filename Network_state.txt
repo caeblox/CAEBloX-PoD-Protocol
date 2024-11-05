@@ -1,7 +1,7 @@
 Network State Report
 ====================
 
-Initial Network Similarity Score: 0.4384
+Initial Network Similarity Score (Excluding Self-Similarity): 0.2512
 Initial Network Similarity Matrix:
                   ahmed_25deg_m.stl aneurysm.stl cylinder.stl naca8408_long.stl
 ahmed_25deg_m.stl               1.0     0.023547     0.380216          0.701371
@@ -11,10 +11,10 @@ naca8408_long.stl          0.701371     0.023546     0.354755               1.0
 
 
 Processing file: 4149900_Voronoi_vase.stl
-Minting Date: 2024-11-05 23:16:15
+Minting Date: 2024-11-05 23:26:44
 PoD Similarity Score: 0.0186
-File '4149900_Voronoi_vase.stl' is unique. Proceeding with minting.Network Similarity Score (Before Minting): 0.4384
-Network Similarity Score (After Minting): 0.3266
+File '4149900_Voronoi_vase.stl' is unique. Proceeding with minting.Network Similarity Score (Before Minting): 0.2512
+Network Similarity Score (After Minting): 0.1582
 Network Reward: The new CAD file rewards the network.
 Similarity Scores for the New CAD File:
   ahmed_25deg_m.stl: 0.0184
@@ -33,10 +33,10 @@ naca8408_long.stl                 0.701371     0.023546     0.354755            
 
 
 Processing file: 4692063_buff-dog.stl
-Minting Date: 2024-11-05 23:16:16
+Minting Date: 2024-11-05 23:26:45
 PoD Similarity Score: 0.0387
-File '4692063_buff-dog.stl' is unique. Proceeding with minting.Network Similarity Score (Before Minting): 0.3266
-Network Similarity Score (After Minting): 0.2653
+File '4692063_buff-dog.stl' is unique. Proceeding with minting.Network Similarity Score (Before Minting): 0.1582
+Network Similarity Score (After Minting): 0.1184
 Network Reward: The new CAD file rewards the network.
 Similarity Scores for the New CAD File:
   ahmed_25deg_m.stl: 0.0458

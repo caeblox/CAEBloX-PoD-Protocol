@@ -25,7 +25,7 @@ try:
 
         # Calculate initial network similarity score
         initial_network_score = calculate_network_similarity_score(similarity_matrix)
-        report_file.write(f"Initial Network Similarity Score: {initial_network_score:.4f}\n")
+        report_file.write(f"Initial Network Similarity Score (Excluding Self-Similarity): {initial_network_score:.4f}\n")
         report_file.write(f"Initial Network Similarity Matrix:\n{similarity_matrix}\n\n")
 
         # Loop over each file in the new_cad folder
