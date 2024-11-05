@@ -20,11 +20,11 @@ pip install -r requirements.txt
 
 README.txt
 
-# STL-Similarity-Analyzer
+# CAEBloX PoD Protocol
 
 ## Overview
 
-**STL-Similarity-Analyzer** is a Python-based tool for assessing geometric similarity between 3D CAD files, specifically in STL and VTK formats. The system uses Signed Distance Functions (SDF) with nearest-neighbor approaches to evaluate similarity between CAD files, supporting a Proof of Design (PoD) scoring system. This tool helps identify unique designs and prevents redundant CAD files from being added to the network.
+**CAEBloX PoD Protocol** is a Python-based tool for assessing geometric similarity between 3D CAD files, specifically in STL and VTK formats. The system uses Signed Distance Functions (SDF) with nearest-neighbor approaches to evaluate similarity between CAD files, supporting a Proof of Design (PoD) scoring system. This tool helps identify unique designs and prevents redundant CAD files from being added to the network.
 
 The tool processes all files in the `new_cad` folder, checks their similarity to the existing CAD files in the `database`, and only adds unique files to the database.
 
